@@ -10,5 +10,8 @@ No guarantees and not an official project of the Ontario Digital Service!
 
 ## Instructions
 
+Requires node and npm.
+
 * `npm install`
-* `npx @11ty/eleventy --serve`
+* `npm run serve`
+* Visit `http://localhost:8080` in your browser
