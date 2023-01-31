@@ -20,6 +20,8 @@ Requires node and npm.
 
 ## Notes
 
+Nearly everything here is default `11ty`, but these two files are specifically of interest:
+
 * `src/_data/weddingOfficiants.js`:
     * Fetches and caches the [marriage officiants dataset](https://data.ontario.ca/dataset/registered-marriage-officiants) using the [eleventy-fetch plugin](https://www.11ty.dev/docs/plugins/fetch/)
     * Parses and transforms the data, and makes it available to templates using Eleventy's [global data files](https://www.11ty.dev/docs/data-global/) feature
