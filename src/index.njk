@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ontario Wedding Officiants List</title>    
+    <script defer src="https://unpkg.com/alpinejs@3.7.0/dist/cdn.min.js"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+  </head>
+  <body>	
+  </body>
+</html>
+
+<h1>Ontario Wedding Officiants List</h1>
+<p>Based on the <a href="https://data.ontario.ca/dataset/registered-marriage-officiants">Registered marriage officiants dataset</a> from the <a href="https://data.ontario.ca/">Ontario Data Catalogue</a>
+<p style="font-size: small;">Built with extreme speed by <a href="https://github.com/aharnum-ods">Alan Harnum</a> using <a href="https://www.11ty.dev/">Eleventy</a> and <a href="https://alpinejs.dev/">Alpine.js</a>. Not an official project of the Ontario Digital Service! Hello Civic Tech folks!</p>
+
+<hr />
+
+<p>Details on <strong>{{ weddingOfficiants.officiants.length }}</strong> officiants from <strong>{{ weddingOfficiants.affiliations.length }}</strong> affiliations, in <strong>{{ weddingOfficiants.municipalities.length }}</strong> municipalities.</p>
+
+<div x-cloak x-data="{showSection: false}">
+    <h2>By Municipality <button @click="showSection = !showSection">Show</button></h2>
+    {% for municipality, officiants in weddingOfficiants.officiants | sort(attribute='Municipality') | groupby("Municipality") %}
+        <div x-show="showSection" x-cloak x-data="{show: false}">            
+            <h4>{{ municipality }} <button @click="show = !show">Show</button></h4>            
+            <div x-show="show">    
+            {% for officiant in officiants %}
+            <div class="officiant-card">
+                <ul>
+                    <li><strong>Name: </strong>{{ officiant["First Name"]}} {{ officiant["Last Name"]}}</li>
+                    <li><strong>Affiliation: </strong>{{ officiant["Affiliation"]}}</li>
+                    <li><strong>Municipality: </strong>{{ officiant["Municipality"]}}</li>
+                </ul>
+            </div>    
+            {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<div x-cloak x-data="{showSection: false}">
+<h2>By Affiliation <button @click="showSection = !showSection">Show</button></h2>
+    {% for affiliation, officiants in weddingOfficiants.officiants | sort(attribute='Affiliation') | groupby("Affiliation") %}
+        <div x-show="showSection" x-cloak x-data="{show: false}">
+            <h3>{{ affiliation }} <button @click="show = !show">Show</button></h3>
+            <div x-show="show">    
+            {% for officiant in officiants %}
+                <div class="officiant-card">
+                <ul>
+                    <li><strong>Name: </strong>{{ officiant["First Name"]}} {{ officiant["Last Name"]}}</li>
+                    <li><strong>Affiliation: </strong>{{ officiant["Affiliation"]}}</li>
+                    <li><strong>Municipality: </strong>{{ officiant["Municipality"]}}</li>
+                </ul>
+            </div>
+            {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
